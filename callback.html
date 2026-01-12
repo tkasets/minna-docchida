@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>認証中...</title>
+  <script>
+    // URLのクエリパラメータをそのままアプリにリダイレクト
+    const params = window.location.search;
+    const hash = window.location.hash;
+    window.location.href = 'pollapp://auth/callback' + params + hash;
+  </script>
+</head>
+<body>
+  <p>アプリに戻っています...</p>
+</body>
+</html>
