@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>みんなどっち派？</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f5f5f5;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .container {
+      background: white;
+      border-radius: 20px;
+      padding: 40px 30px;
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: #1A1A1A;
+      margin-bottom: 20px;
+    }
+    .message {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+    .loading {
+      font-size: 14px;
+      color: #999;
+      margin-bottom: 20px;
+    }
+    .spinner {
+      width: 30px;
+      height: 30px;
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #1A1A1A;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .store-button {
+      display: inline-block;
+      background: #1A1A1A;
+      color: white;
+      text-decoration: none;
+      padding: 14px 30px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .store-button:hover {
+      background: #333;
+    }
+    .note {
+      font-size: 12px;
+      color: #999;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">みんなどっち派？</div>
+    <div class="spinner"></div>
+    <p class="loading">アプリを開いています...</p>
+    <p class="message">アプリがインストールされていない場合は<br>下のボタンからダウンロードしてください</p>
+    <a id="storeLink" href="#" class="store-button">App Storeで開く</a>
+    <p class="note">※ アプリで質問に回答できます</p>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const pollId = params.get('id');
+    const APP_STORE_URL = 'https://apps.apple.com/app/idXXXXXXXXXX';
+    const appUrl = pollId ? `minnadocchi://poll/${pollId}` : 'minnadocchi://';
+    document.getElementById('storeLink').href = APP_STORE_URL;
+    window.location.href = appUrl;
+    setTimeout(() => {
+      document.querySelector('.loading').textContent = 'アプリが見つかりませんでした';
+      document.querySelector('.spinner').style.display = 'none';
+    }, 2500);
+  </script>
+</body>
+</html>
